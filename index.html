@@ -6,26 +6,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
+body {
+  margin: 0;
+  min-height: 100svh;   /* important for mobile */
+  overflow-y: auto;     /* allow scrolling */
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* instead of center */
+  text-align: center;
+  padding: 20px 10px;   /* breathing space */
+}
 
-  img {
-    max-width: 320px;
-    width: 90%;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    animation: fadeIn 2s ease;
-  }
+img {
+  max-width: 320px;
+  width: 90%;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  animation: fadeIn 2s ease;
+  margin-bottom: 15px;
+}
+
 
   h1 {
     margin: 20px;
