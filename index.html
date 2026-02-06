@@ -6,34 +6,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  min-height: 100svh;   /* important for mobile */
-  overflow-y: auto;     /* allow scrolling */
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* instead of center */
-  text-align: center;
-  padding: 20px 10px;   /* breathing space */
-}
+  body {
+    margin: 0;
+    min-height: 100svh;
+    overflow-y: auto;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 20px 10px;
+  }
 
-img {
-  max-width: 320px;
-  width: 90%;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  animation: fadeIn 2s ease;
-  margin-bottom: 15px;
-}
+  #mainContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
+  img {
+    max-width: 320px;
+    width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    margin-bottom: 15px;
+  }
 
   h1 {
-    margin: 20px;
+    margin: 15px 10px;
     color: #ff4d6d;
-    font-size: 26px;
+    font-size: clamp(22px, 5vw, 26px);
   }
 
   .buttons {
@@ -50,6 +54,10 @@ img {
     transition: transform 0.2s;
   }
 
+  button:hover {
+    transform: scale(1.1);
+  }
+
   .yes {
     background: #ff4d6d;
     color: white;
@@ -61,32 +69,38 @@ img {
     position: relative;
   }
 
-  /* Gentle message */
   #gentleMsg {
     display: none;
     margin-top: 15px;
     font-size: 16px;
     color: #b23a48;
-    animation: fadeIn 1.5s ease;
   }
 
-  /* Quote screen */
+  /* Blur effect */
+  .blur {
+    filter: blur(8px);
+    transition: filter 1.5s ease;
+  }
+
+  /* Fullscreen quote screen */
   #quoteScreen {
     display: none;
-    position: absolute;
+    position: fixed;
     inset: 0;
     background: linear-gradient(to bottom, #fde2e4, #fadadd);
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    z-index: 999;
+    padding: 30px 20px;
   }
 
   .quote {
-    max-width: 85%;
-    font-size: 22px;
+    max-width: 90%;
+    font-size: clamp(18px, 5vw, 22px);
     color: #b23a48;
     line-height: 1.7;
-    animation: fadeInSlow 4s ease;
+    animation: fadeInSlow 3s ease;
   }
 
   .signature {
@@ -95,27 +109,23 @@ img {
     right: 20px;
     font-size: 16px;
     color: rgba(0,0,0,0.5);
-    animation: fadeInSlow 6s ease;
+    animation: fadeInSlow 5s ease;
   }
 
   /* Hearts */
   .heart {
-    position: absolute;
+    position: fixed;
     bottom: -20px;
     font-size: 20px;
     animation: floatUp 6s linear infinite;
     opacity: 0.7;
+    z-index: 1000;
   }
 
   @keyframes floatUp {
     0% { transform: translateY(0); opacity: 0; }
     10% { opacity: 0.7; }
     100% { transform: translateY(-120vh); opacity: 0; }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
   }
 
   @keyframes fadeInSlow {
@@ -127,33 +137,37 @@ img {
 
 <body>
 
-<img id="mainImg"
-src="https://raw.githubusercontent.com/bharath297-hub/Valentine-/main/F6C3C3FB-EBCF-4360-8BD3-BDCFDB6BA170.jpeg"
-alt="Valentine">
+<div id="mainContent">
 
-<h1 id="question">Will you be my Valentine? 💕</h1>
+  <img
+    src="https://raw.githubusercontent.com/bharath297-hub/Valentine-/main/F6C3C3FB-EBCF-4360-8BD3-BDCFDB6BA170.jpeg"
+    alt="Valentine">
 
-<div class="buttons" id="buttons">
-  <button class="yes" onclick="yesClicked()">Yes 💖</button>
-  <button class="no" onclick="noClicked()">No 🙈</button>
+  <h1>Will you be my Valentine? 💕</h1>
+
+  <div class="buttons">
+    <button class="yes" onclick="yesClicked()">Yes 💖</button>
+    <button class="no" onclick="noClicked()">No 🙈</button>
+  </div>
+
+  <div id="gentleMsg">
+    Hey… don’t tire yourself 😌<br>
+    I just wanted you to know you’re special to me 💕<br>
+    Take your time.
+  </div>
+
 </div>
 
-<div id="gentleMsg">
-  Hey… don’t tire yourself 😌  
-  I just wanted you to know you’re special to me 💕  
-  Take your time.
-</div>
-
-<!-- Quote Screen -->
+<!-- Romantic Quote Screen -->
 <div id="quoteScreen">
   <div class="quote">
-    “Vyshnavi,  
-    let’s choose each other every day.  
-    Through dreams and doubts,  
-    through silence and laughter.  
-    Let’s grow, support, and walk forward  
-    hand in hand —  
-    not because life is easy,  
+    “Vyshnavi,<br><br>
+    let’s choose each other every day.<br>
+    Through dreams and doubts,<br>
+    through silence and laughter.<br><br>
+    Let’s grow, support, and walk forward<br>
+    hand in hand —<br>
+    not because life is easy,<br>
     but because love makes it worth it.”
   </div>
 
@@ -179,13 +193,11 @@ alt="Valentine">
   }
 
   function yesClicked() {
-    document.getElementById("mainImg").style.display = "none";
-    document.getElementById("question").style.display = "none";
-    document.getElementById("buttons").style.display = "none";
-    document.getElementById("gentleMsg").style.display = "none";
+    document.body.style.overflow = "hidden";
+    document.getElementById("mainContent").classList.add("blur");
     document.getElementById("quoteScreen").style.display = "flex";
 
-    setInterval(createHeart, 200);
+    setInterval(createHeart, 180);
   }
 
   function createHeart() {
@@ -199,7 +211,8 @@ alt="Valentine">
     setTimeout(() => heart.remove(), 6000);
   }
 
-  setInterval(createHeart, 800);
+  // soft hearts before Yes
+  setInterval(createHeart, 900);
 </script>
 
 </body>
