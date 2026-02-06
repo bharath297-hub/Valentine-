@@ -1,159 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>💖 For You</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>💖 For You</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
-      text-align: center;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: background 2s ease;
+  }
 
-    /* Your name */
-    .signature {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 14px;
-      color: rgba(0,0,0,0.4);
-      animation: fadeIn 4s ease-in-out forwards;
-    }
+  img {
+    max-width: 320px;
+    width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    animation: fadeIn 2s ease;
+  }
 
-    img {
-      max-width: 320px;
-      width: 90%;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      animation: fadeIn 2s ease-in-out;
-    }
+  h1 {
+    margin: 20px;
+    color: #ff4d6d;
+    font-size: 26px;
+    animation: fadeIn 2.5s ease;
+  }
 
-    h1 {
-      margin: 20px 10px;
-      color: #ff4d6d;
-      font-size: 26px;
-      animation: fadeIn 2.5s ease-in-out;
-    }
+  .buttons {
+    margin-top: 10px;
+  }
 
-    .buttons {
-      margin-top: 10px;
-    }
+  button {
+    padding: 12px 22px;
+    font-size: 18px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
 
-    button {
-      padding: 12px 22px;
-      font-size: 18px;
-      margin: 10px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
+  .yes {
+    background: #ff4d6d;
+    color: white;
+  }
 
-    .yes {
-      background: #ff4d6d;
-      color: white;
-    }
+  .no {
+    background: #ccc;
+    color: #333;
+    position: relative;
+  }
 
-    .no {
-      background: #ccc;
-      color: #333;
-      position: relative;
-    }
+  button:hover {
+    transform: scale(1.1);
+  }
 
-    button:hover {
-      transform: scale(1.1);
-    }
+  /* Quote screen */
+  #quoteScreen {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, #fde2e4, #fadadd);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: fadeIn 2s ease;
+  }
 
-    #message {
-      margin-top: 20px;
-      font-size: 22px;
-      color: #ff4d6d;
-      display: none;
-      animation: fadeIn 1.5s ease-in-out;
-    }
+  .quote {
+    max-width: 85%;
+    font-size: 22px;
+    color: #b23a48;
+    line-height: 1.7;
+    animation: fadeInSlow 4s ease;
+  }
 
-    /* Hearts */
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 20px;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.6;
-    }
+  .signature {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 16px;
+    color: rgba(0,0,0,0.5);
+    animation: fadeInSlow 6s ease;
+  }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(-110vh);
-        opacity: 0;
-      }
-    }
+  /* Hearts */
+  .heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.7;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-  </style>
+  @keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 0.7; }
+    100% { transform: translateY(-120vh); opacity: 0; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInSlow {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
 </head>
 
 <body>
 
-  <!-- Your name -->
-  <div class="signature">— Bharath Reddy</div>
+<img id="mainImg"
+src="https://raw.githubusercontent.com/bharath297-hub/Valentine-/main/F6C3C3FB-EBCF-4360-8BD3-BDCFDB6BA170.jpeg"
+alt="Valentine">
 
-  <!-- Image -->
-  <img src="https://raw.githubusercontent.com/bharath297-hub/Valentine-/main/F6C3C3FB-EBCF-4360-8BD3-BDCFDB6BA170.jpeg" alt="Valentine">
+<h1 id="question">Will you be my Valentine? 💕</h1>
 
-  <h1>Will you be my Valentine? 💕</h1>
+<div class="buttons" id="buttons">
+  <button class="yes" onclick="yesClicked()">Yes 💖</button>
+  <button class="no" onmouseover="moveNo()">No 🙈</button>
+</div>
 
-  <div class="buttons">
-    <button class="yes" onclick="sayYes()">Yes 💖</button>
-    <button class="no" onmouseover="moveNo()">No 🙈</button>
+<!-- Quote Screen -->
+<div id="quoteScreen">
+  <div class="quote">
+    “Vyshnavi,  
+    let’s choose each other every day.  
+    Through dreams and doubts,  
+    through silence and laughter.  
+    Let’s grow, support, and walk forward  
+    hand in hand —  
+    not because life is easy,  
+    but because love makes it worth it.”
   </div>
 
-  <div id="message">Yay! You just made my day 💘🥰</div>
+  <div class="signature">
+    Bharath ❤️ Vyshnavi
+  </div>
+</div>
 
-  <script>
-    function sayYes() {
-      document.getElementById("message").style.display = "block";
-    }
+<script>
+  function moveNo() {
+    const btn = document.querySelector('.no');
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+  }
 
-    function moveNo() {
-      const btn = document.querySelector('.no');
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 200 - 100;
-      btn.style.transform = `translate(${x}px, ${y}px)`;
-    }
+  function yesClicked() {
+    document.getElementById("mainImg").style.display = "none";
+    document.getElementById("question").style.display = "none";
+    document.getElementById("buttons").style.display = "none";
+    document.getElementById("quoteScreen").style.display = "flex";
 
-    // Floating hearts
-    setInterval(() => {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerText = '💖';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
-      document.body.appendChild(heart);
+    // More hearts continuously
+    setInterval(createHeart, 200);
+  }
 
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
-    }, 500);
-  </script>
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = Math.random() > 0.5 ? '💖' : '💞';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 15 + 18) + 'px';
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }
+
+  // Initial gentle hearts
+  setInterval(createHeart, 800);
+</script>
 
 </body>
 </html>
