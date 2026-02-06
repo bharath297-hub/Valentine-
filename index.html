@@ -10,16 +10,14 @@
     margin: 0;
     height: 100vh;
     overflow: hidden;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    transition: background 2s ease;
   }
-  
 
   img {
     max-width: 320px;
@@ -33,7 +31,6 @@
     margin: 20px;
     color: #ff4d6d;
     font-size: 26px;
-    animation: fadeIn 2.5s ease;
   }
 
   .buttons {
@@ -61,8 +58,13 @@
     position: relative;
   }
 
-  button:hover {
-    transform: scale(1.1);
+  /* Gentle message */
+  #gentleMsg {
+    display: none;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #b23a48;
+    animation: fadeIn 1.5s ease;
   }
 
   /* Quote screen */
@@ -74,12 +76,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    animation: fadeIn 2s ease;
   }
 
   .quote {
     max-width: 85%;
-    font-size: clamp(18px, 5vw, 22px);
+    font-size: 22px;
     color: #b23a48;
     line-height: 1.7;
     animation: fadeInSlow 4s ease;
@@ -131,7 +132,13 @@ alt="Valentine">
 
 <div class="buttons" id="buttons">
   <button class="yes" onclick="yesClicked()">Yes 💖</button>
-  <button class="no" onmouseover="moveNo()">No 🙈</button>
+  <button class="no" onclick="noClicked()">No 🙈</button>
+</div>
+
+<div id="gentleMsg">
+  Hey… don’t tire yourself 😌  
+  I just wanted you to know you’re special to me 💕  
+  Take your time.
 </div>
 
 <!-- Quote Screen -->
@@ -153,20 +160,28 @@ alt="Valentine">
 </div>
 
 <script>
-  function moveNo() {
+  let noCount = 0;
+
+  function noClicked() {
+    noCount++;
+
     const btn = document.querySelector('.no');
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 200 - 100;
     btn.style.transform = `translate(${x}px, ${y}px)`;
+
+    if (noCount >= 10) {
+      document.getElementById("gentleMsg").style.display = "block";
+    }
   }
 
   function yesClicked() {
     document.getElementById("mainImg").style.display = "none";
     document.getElementById("question").style.display = "none";
     document.getElementById("buttons").style.display = "none";
+    document.getElementById("gentleMsg").style.display = "none";
     document.getElementById("quoteScreen").style.display = "flex";
 
-    // More hearts continuously
     setInterval(createHeart, 200);
   }
 
@@ -181,7 +196,6 @@ alt="Valentine">
     setTimeout(() => heart.remove(), 6000);
   }
 
-  // Initial gentle hearts
   setInterval(createHeart, 800);
 </script>
 
